@@ -1,0 +1,17 @@
+[package]
+name = "glua"
+version = "0.0.0"
+edition = "2018"
+license = "ISC"
+authors = [
+    "Joshua Piper <rust@doctor-internet.dev"
+]
+description = "GLua Standard Library Access for Garry's Mod Modules."
+repository = "https://github.com/WilliamVenner/gmod-rs"
+
+[dependencies]
+gmod = {version = "10.2.2", features = ["gmcl"], default-features = false}
+
+[[example]]
+name = "gm_gluaexample"
+crate-type = ["cdylib"]
