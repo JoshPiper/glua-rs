@@ -1,5 +1,7 @@
 
+/// A trait which shows a rust enum has a equivalent lua enum, stored as a string key in _G
 pub trait HasLuaGlobal {
+    /// Fetch the _G key for this enum value.
     fn global(self) -> &'static str;
 }
 
