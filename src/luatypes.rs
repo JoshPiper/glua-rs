@@ -1,6 +1,8 @@
 use gmod::lua::{LuaString};
 
+/// Trait to allow converting to a lua string.
 pub trait LuaStringable {
+    /// Converts to a lua string.
     fn to_lua_string(self) -> LuaString;
 }
 
