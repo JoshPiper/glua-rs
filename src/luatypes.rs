@@ -17,3 +17,9 @@ impl LuaStringable for String {
         self.as_ptr() as LuaString
     }
 }
+
+impl LuaStringable for LuaString {
+    fn to_lua_string(self) -> LuaString {
+        self
+    }
+}
