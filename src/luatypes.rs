@@ -1,4 +1,4 @@
-use std::ffi::CString;
+use std::ffi::{CString};
 use gmod::lua::{LuaString};
 
 /// Trait to allow converting to a lua string.
@@ -9,13 +9,13 @@ pub trait LuaStringable {
 
 impl LuaStringable for &str {
     fn to_lua_string(self) -> LuaString {
-        CString::new(self).as_ptr()
+        CString::new(self).unwrap_or_default().as_ptr()
     }
 }
 
 impl LuaStringable for String {
     fn to_lua_string(self) -> LuaString {
-        CString::new(self).as_ptr()
+        CString::new(self).unwrap_or_default().as_ptr()
     }
 }
 
