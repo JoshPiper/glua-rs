@@ -5,6 +5,8 @@ pub trait HasLuaGlobal {
     fn global(self) -> &'static str;
 }
 
+/// AccessorFunc Force State.
+/// See <https://wiki.facepunch.com/gmod/Enums/FORCE>
 pub enum FORCE {
     STRING = 0x01,
     NUMBER = 0x02,

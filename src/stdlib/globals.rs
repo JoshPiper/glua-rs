@@ -16,14 +16,12 @@ macro_rules! global_fn {
 
 pub trait Globals {
     /// Adds simple accessor functions to the table at the given index.
-    /// See https://wiki.facepunch.com/gmod/Global.AccessorFunc
+    /// See <https://wiki.facepunch.com/gmod/Global.AccessorFunc>
     #[allow(non_snake_case)]
     unsafe fn AccessorFunc<F: Into<Option<FORCE>>>(&self, tab: LuaReference, key: &str, name: &str, force: F);
 }
 
 impl Globals for State {
-    /// Adds simple accessor functions to the table at the given index.
-    /// See https://wiki.facepunch.com/gmod/Global.AccessorFunc
     #[allow(non_snake_case)]
     unsafe fn AccessorFunc<F: Into<Option<FORCE>>>(&self, tab: LuaReference, key: &str, name: &str, force: F){
         global_fn!(self, "AccessorFunc");
