@@ -1,9 +1,6 @@
-use std::borrow::Borrow;
-use std::fmt::Display;
-use std::ops::Deref;
-use gmod::lua::{LuaString, State};
+use gmod::lua::{LuaReference, State};
 use crate::luatypes::LuaStringable;
-use crate::stdlib::enums::{FORCE};
+use crate::stdlib::enums::{FORCE, HasLuaGlobal};
 
 /// Reads a string key from _G.
 /// If the value is not a function, an error is raised and the function longjmp's out.
