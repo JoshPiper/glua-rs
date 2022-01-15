@@ -1,5 +1,4 @@
 use std::ffi::CString;
-use gmod::cstr::cstr;
 use gmod::lua::{LuaString};
 
 /// Trait to allow converting to a lua string.
