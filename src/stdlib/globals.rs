@@ -17,7 +17,8 @@ macro_rules! global_fn {
 pub trait Globals {
     /// Adds simple accessor functions to the table at the given index.
     /// See https://wiki.facepunch.com/gmod/Global.AccessorFunc
-    unsafe fn AccessorFunc(&self, tab: i32, key: i32, name: &str, force: Option<FORCE>);
+    #[allow(non_snake_case)]
+    unsafe fn AccessorFunc<F: Into<Option<FORCE>>>(&self, tab: LuaReference, key: &str, name: &str, force: F);
 }
 
 impl Globals for State {
