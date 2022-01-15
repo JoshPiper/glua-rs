@@ -13,5 +13,5 @@ repository = "https://github.com/WilliamVenner/gmod-rs"
 gmod = {version = "10.2.2", features = ["gmcl"], default-features = false}
 
 [[example]]
-name = "gm_gluaexample"
+name = "gmcl_gluaexample_win64"
 crate-type = ["cdylib"]
