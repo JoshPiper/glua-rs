@@ -6,7 +6,6 @@ pub mod stdlib;
 
 
 pub use gmod::lua::{State};
-use stdlib::globals::{};
 
 #[macro_use] extern crate gmod;
 
