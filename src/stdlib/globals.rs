@@ -24,20 +24,17 @@ pub trait Globals {
 impl Globals for State {
     /// Adds simple accessor functions to the table at the given index.
     /// See https://wiki.facepunch.com/gmod/Global.AccessorFunc
-    unsafe fn AccessorFunc(&self, tab: i32, key: i32, name: &str, force: Option<FORCE>){
-        global_fn(self, "AccessorFunc");
-        self.push_value(tab);
-        self.push_value(key);
+    #[allow(non_snake_case)]
+    unsafe fn AccessorFunc<F: Into<Option<FORCE>>>(&self, tab: LuaReference, key: &str, name: &str, force: F){
+        global_fn!(self, "AccessorFunc");
+        self.from_reference(tab);
+        self.push_string(key);
         self.push_string(name);
-        // match force {
-        //     None => self.push_nil(),
-        //     Some(force) => {
-        //         match FORCE_LOOKUP[force] {
-        //             None => self.push_nil(),
-        //             Some(force) => self.get_global(force as LuaString)
-        //         }
-        //     }
-        // }
+        let forced = force.into();
+        match forced {
+            None => self.push_nil(),
+            Some(forced) => self.get_global(forced.global().to_lua_string())
+        }
         self.call(4, 0);
     }
 }
