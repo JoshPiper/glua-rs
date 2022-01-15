@@ -4,12 +4,13 @@ use crate::stdlib::enums::{FORCE, HasLuaGlobal};
 
 /// Reads a string key from _G.
 /// If the value is not a function, an error is raised and the function longjmp's out.
-unsafe fn global_fn<T: LuaStringable + Display + Copy>(state: &State, name: T){
-    state.get_global(name.to_lua_string());
-    let func = state.is_function(-1);
-    if !func {
-        state.error(format!("{} could not be found or was not a function.", name));
-        unreachable!();
+macro_rules! global_fn {
+    ($state:ident, $name:literal) => {
+        $state.get_global(lua_string!($name));
+        let func = $state.is_function(-1);
+        if !func {
+            $state.error(concat!($name, " could not be found or was not a function."));
+        }
     }
 }
 
