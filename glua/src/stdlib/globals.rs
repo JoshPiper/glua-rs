@@ -18,41 +18,41 @@ pub trait Globals {
     /// Adds simple accessor functions to the table at the given index.
     /// See <https://wiki.facepunch.com/gmod/Global.AccessorFunc>
     #[allow(non_snake_case)]
-    unsafe fn AccessorFunc<F: Into<Option<FORCE>> + Display>(&self, tab: LuaReference, key: &str, name: &str, force: F);
+    unsafe fn AccessorFunc<F: Into<Option<FORCE>>>(&self, tab: LuaReference, key: &str, name: &str, force: F);
+
+    /// Adds a file to the client download list.
+    /// NOOP on the Client.
+    /// See <https://wiki.facepunch.com/gmod/Global.AddCSLuaFile>
+    #[allow(non_snake_case)]
+    unsafe fn AddCSLuaFile<F: Into<Option<String>>>(&self, file: F);
 }
 
 impl Globals for State {
     #[allow(non_snake_case)]
-    unsafe fn AccessorFunc<F: Into<Option<FORCE>> + Display>(&self, tab: LuaReference, key: &str, name: &str, force: F){
+    unsafe fn AccessorFunc<F: Into<Option<FORCE>>>(&self, tab: LuaReference, key: &str, name: &str, force: F){
         global_fn!(self, "AccessorFunc");
-        println!("got table ref: {}", tab);
         self.from_reference(tab);
-        println!("got key: {}", key);
         self.push_string(key);
-        println!("got func name: {}", name);
         self.push_string(name);
 
-        println!("got force state: {}", force);
         let forced = force.into();
         match forced {
             None => self.push_nil(),
             Some(ref force) => self.get_global(force.global())
         }
 
-        if forced.is_some() {
-            let f = forced.unwrap();
-            println!("unwrapped: {}", f);
-            let global = f.global();
-            println!("global: {:?}", global);
+        self.call(4, 0);
+    }
 
-            self.get_global(f.global());
-            println!("{}", self.get_type(-1));
-
-            let v = self.check_number(-1);
-            println!("value: {}", v);
-            self.pop();
+    #[allow(non_snake_case)]
+    unsafe fn AddCSLuaFile<F: Into<Option<String>>>(&self, file: F){
+        global_fn!(self, "AddCSLuaFile");
+        let filed = file.into();
+        match filed {
+            None => self.push_nil(),
+            Some(ref file) => self.push_string(file)
         }
 
-        self.call(4, 0);
+        self.call(1, 0);
     }
 }
