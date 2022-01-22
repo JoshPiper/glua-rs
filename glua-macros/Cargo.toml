@@ -1,0 +1,12 @@
+[package]
+name = "glua-macros"
+version = "0.0.0"
+edition = "2018"
+license = "ISC"
+authors = [
+    "Joshua Piper <rust@doctor-internet.dev>"
+]
+description = "Macros for the GLua package."
+
+[lib]
+proc-macro = true
