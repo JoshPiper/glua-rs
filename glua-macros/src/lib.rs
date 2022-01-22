@@ -72,11 +72,11 @@ pub fn glua_enum(item: TokenStream) -> TokenStream {
     }
 
     let out = [
-        format!("/// {} Enumeration.", name),
-        format!("/// See <https://wiki.facepunch.com/gmod/Enums/{}>", name),
         format!("{}", csts.join("\n")),
         "#[derive(Clone)]".to_string(),
         "#[derive(Copy)]".to_string(),
+        format!("#[doc=\"{} Enumeration.\"]", name),
+        format!("#[doc=\"See <https://wiki.facepunch.com/gmod/Enums/{}>\"]", name),
         format!("pub enum {} {{", name),
         format!("{}", es.join(",\n")),
         "}".to_string(),
