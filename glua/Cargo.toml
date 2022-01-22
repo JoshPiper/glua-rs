@@ -1,0 +1,18 @@
+[package]
+name = "glua"
+version = "0.0.0"
+edition = "2018"
+license = "ISC"
+authors = [
+    "Joshua Piper <rust@doctor-internet.dev>"
+]
+description = "GLua Standard Library Access for Garry's Mod Modules."
+
+[dependencies]
+gmod = {version = "10.2.2", features = ["gmcl"], default-features = false}
+paste = "1.0.6"
+glua-macros = {version = "0.0.0", path = "../glua-macros"}
+
+[[example]]
+name = "gmcl_gluaexample_win64"
+crate-type = ["cdylib"]
